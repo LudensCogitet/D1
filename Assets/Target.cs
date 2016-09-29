@@ -4,6 +4,7 @@ using System.Collections;
 public class Target : MonoBehaviour {
 
     Rigidbody2D myBody;
+    Player thePlayer;
 
     Vector2 movement;
     public float speed = 4f;
@@ -19,12 +20,15 @@ public class Target : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        thePlayer = FindObjectOfType<Player>();
         myBody.velocity = movement;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if (transform.localScale.x > 0f)
+            transform.localScale = new Vector3((thePlayer.points/1000f)*2, (thePlayer.points/1000f)*2, transform.localScale.z);
+
 	}
 
     void OnTriggerEnter2D(Collider2D col)
