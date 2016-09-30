@@ -19,15 +19,15 @@ public class BombThrower : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         thePlayer = FindObjectOfType<Player>();
-        Invoke("SpawnBomb", Random.Range(0.0001f, maxSpawnTime));
+        Invoke("SpawnBomb", maxSpawnTime);
     }
 
 	void SpawnBomb()
     {
         Vector3 initPos = new Vector3(Random.Range(leftWallX, rightWallX), 0f, 0f);
         Instantiate(bombPrefab, initPos,Quaternion.identity);
-        Invoke("SpawnBomb", Random.Range(0.0001f, maxSpawnTime));
+        Invoke("SpawnBomb", maxSpawnTime);
         if (maxSpawnTime > minSpawnTime)
-            maxSpawnTime -= (thePlayer.time / 10f)/4;
+            maxSpawnTime--;
     }
 }

@@ -11,6 +11,7 @@ public class Bomb : MonoBehaviour {
     public float lastFor;
 
     public bool exploded = false;
+    public bool hitPlayer = false;
 
     public GameObject squareOutline;
     GameObject outline;
@@ -65,7 +66,7 @@ public class Bomb : MonoBehaviour {
     void OnTriggerStay2D(Collider2D col)
     {
         Debug.Log("GORPH!");
-        if (col.gameObject == thePlayer.gameObject && exploded == true)
+        if (col.gameObject == thePlayer.gameObject && exploded == true && hitPlayer == false)
         {
             Vector2 newVel = thePlayer.myBody.velocity;
             if (newVel.x < 0f)
@@ -73,6 +74,8 @@ public class Bomb : MonoBehaviour {
             else
                 newVel += force;
             thePlayer.myBody.velocity = -newVel;
+
+            hitPlayer = true;
         }
     }
 
