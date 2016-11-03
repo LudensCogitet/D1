@@ -27,7 +27,7 @@ public class Target : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (transform.localScale.x > 0f)
-            transform.localScale = new Vector3((thePlayer.points/1000f)*2, (thePlayer.points/1000f)*2, transform.localScale.z);
+            transform.localScale = new Vector3((thePlayer.points/1000f)*5, (thePlayer.points/1000f)*5, transform.localScale.z);
 
 	}
 
