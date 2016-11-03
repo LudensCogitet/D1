@@ -15,6 +15,7 @@ public class Player : MonoBehaviour {
     public float speed = 0f;
     public float points = 100;
     public float time = 0.0f;
+    public float tilt;
 
     public Vector2 d;
 
@@ -28,8 +29,14 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         vector = Vector2.zero;
+        InvokeRepeating("updatePos",0.001f,0.01f);
 	}
 	
+    void updatePos()
+    {
+      transform.position = new Vector3(line.bounds.extents.x * tilt, transform.position.y);
+    }
+
 	// Update is called once per frame
 	void Update () {
 
@@ -45,15 +52,12 @@ public class Player : MonoBehaviour {
 
         pointsText.text = Mathf.Round(points).ToString();
 
-        float tilt;
         //if (Input.touchSupported)
-         tilt = Input.acceleration.x * 1.5f;
+        tilt = Input.acceleration.x * 1.5f;
         tilt = Mathf.Round(tilt * 100f) / 100f;
         Debug.Log(tilt);
         //else
          //tilt = Input.GetAxis("Horizontal");
-
-        transform.position = new Vector3(line.bounds.extents.x * tilt, transform.position.y);
         
         if (Input.touchCount > 0 || Input.GetButtonDown("Jump"))
         {
